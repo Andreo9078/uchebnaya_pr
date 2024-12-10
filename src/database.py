@@ -20,6 +20,10 @@ def get_session() -> Session:
 
 
 if __name__ == "__main__":
-    Value1 = get_session()
-    Value1.execute(text("SELECT version();"))
-    print(Value1)
+    from src.model.auth.models import *
+
+    session = get_session()
+    version = session.execute(text("SELECT version();"))
+    print(version)
+
+    Base.metadata.create_all(bind=engine)

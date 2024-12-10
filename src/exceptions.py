@@ -25,3 +25,23 @@ class ObjectDoesNotExist(Exception):
             return f"Object with id '{self.object_id}' does not exist."
         else:
             return "Object does not exist."
+
+
+class PermissionDenied(Exception):
+    def __str__(self) -> str:
+        return "Permission denied"
+
+
+class RoleDoesNotExist(Exception):
+    def __init__(self, role_id: int) -> None:
+        self.role_id = role_id
+
+    def __str__(self) -> str:
+        return f"Роль с id \"{self.role_id}\" не существует"
+
+class UserDoesNotExist(Exception):
+    def __init__(self, user_id: int) -> None:
+        self.user_id = user_id
+
+    def __str__(self) -> str:
+        return f"Пользователь с {self.user_id} не существует"

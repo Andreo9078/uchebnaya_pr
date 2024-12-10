@@ -5,6 +5,6 @@ from src.model.auth.models import RoleORM
 from src.model.base import SQLAlchemyRepository
 
 
-class RoleRepo(SQLAlchemyRepository[Role, RoleORM, int]):
+class RoleRepo(SQLAlchemyRepository[Role, RoleORM]):
     def __init__(self, session: Session) -> None:
         super().__init__(Role, RoleORM, session)

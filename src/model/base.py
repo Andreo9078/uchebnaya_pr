@@ -71,8 +71,8 @@ class SQLAlchemyRepository[DomainObj: BaseModel, ORMObj, ID](
 
         raise ObjectDoesNotExist(self.domain_obj.__name__, id_)
 
-    async def update(self, id_: ID, new_values: dict[str, Any]) -> DomainObj:
-        obj = await self._get_orm_model(id_)
+    def update(self, id_: ID, new_values: dict[str, Any]) -> DomainObj:
+        obj = self._get_orm_model(id_)
         print(obj)
         if obj is None:
             raise ObjectDoesNotExist(self.domain_obj.__name__, id_)

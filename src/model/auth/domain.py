@@ -1,10 +1,11 @@
 from pydantic import BaseModel
 
-from src.model.auth.models import RoleORM
-
 
 class Role(BaseModel):
     name: str
+
+    class Config:
+        from_attributes = True
 
 
 class User(BaseModel):
@@ -18,4 +19,7 @@ class User(BaseModel):
 
     role_id: int
 
-    role: RoleORM
+    role: Role
+
+    class Config:
+        from_attributes = True
