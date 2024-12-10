@@ -7,7 +7,7 @@ from src.database import Base
 from src.model.auth.models import UserORM
 
 
-class UsedDetailsORM(Base):
+class UsedDetailORM(Base):
     __tablename__ = "used_details"
     id: Mapped[int] = Column(Integer, primary_key=True)
     detail_id: Mapped[int] = Column(Integer, ForeignKey("details.id"))
@@ -19,7 +19,7 @@ class UsedDetailsORM(Base):
     request: Mapped["RequestORM"] = relationship("RequestORM")
 
 
-class TechTypesORM(Base):
+class TechTypeORM(Base):
     __tablename__ = "tech_types"
     id: Mapped[int] = Column(Integer, primary_key=True)
     name: Mapped[str] = Column(String, unique=True)
@@ -73,13 +73,13 @@ class RequestORM(Base):
         ForeignKey("users.id"), nullable=False
     )
 
-    tech_type: Mapped[TechTypesORM] = relationship(TechTypesORM)
+    tech_type: Mapped[TechTypeORM] = relationship(TechTypeORM)
     status: Mapped[RequestStatusORM] = relationship(RequestStatusORM)
     master: Mapped[UserORM] = relationship("UserORM", foreign_keys=[master_id])
     client: Mapped[UserORM] = relationship("UserORM", foreign_keys=[client_id])
     comments: Mapped[CommentORM] = relationship(
         "CommentORM", back_populates="request"
     )
-    used_details: Mapped[UsedDetailsORM] = relationship(
+    used_details: Mapped[UsedDetailORM] = relationship(
         "UsedDetailsORM", back_populates="request"
     )
