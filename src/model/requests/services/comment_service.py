@@ -18,6 +18,8 @@ class CommentService:
         if comment is None:
             raise CommentDoesNotExist(obj_id)
 
+        return comment
+
     def get_all(self) -> list[Comment]:
         comments = self.comment_repo.get_all()
         return comments
