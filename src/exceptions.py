@@ -45,7 +45,7 @@ class RoleDoesNotExist(ServiceError):
 
 
 class UserDoesNotExist(ServiceError):
-    def __init__(self, user_id: int) -> None:
+    def __init__(self, user_id: Optional[Any]) -> None:
         self.user_id = user_id
 
     def __str__(self) -> str:

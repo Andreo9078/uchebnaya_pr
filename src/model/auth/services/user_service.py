@@ -2,21 +2,27 @@ from src.exceptions import RoleDoesNotExist, UserDoesNotExist
 from src.model.auth.repos.role_repo import RoleRepo
 from src.model.auth.repos.user_repo import UserRepo
 from src.model.auth.schemes import UserCreate, UserUpdate
-from src.state import State
 
 
 class UserService:
     def __init__(
         self, user_repo: UserRepo,
         role_repo: RoleRepo,
-        state: State
     ):
         self.user_repo = user_repo
         self.role_repo = role_repo
-        self.state = state
 
     def get(self, obj_id: int):
-        return self.user_repo.get(obj_id)
+        user = self.user_repo.get(obj_id)
+        if user is None:
+            raise UserDoesNotExist(obj_id)
+
+    def get_by_username(self, username: str):
+        user = self.user_repo.get_by_username(username)
+        if user is None:
+            raise UserDoesNotExist(username)
+
+        return user
 
     def get_all(self):
         return self.user_repo.get_all()
